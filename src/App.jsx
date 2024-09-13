@@ -18,18 +18,18 @@ export default function App() {
 
   const columnSetterFunctions = [setTasksToDo, setTasksInProgress, setTasksReview, setTasksDone];
 
-  function handleDropTaskIntoColumn(e, setterFunction) {
+  function handleDropTaskIntoColumn(e, tasksSetterFunction) {
     // drop task into a column
     e.preventDefault();
     let droppedTask = JSON.parse(e.dataTransfer.getData("taskData"));
-    setterFunction((prevTasks) => [
+    tasksSetterFunction((prevTasks) => [
       ...prevTasks.filter((task) => task.taskId !== droppedTask.taskId),
       { taskId: droppedTask.taskId, taskText: droppedTask.taskText },
     ]);
 
     // remove dropped task from other columns
     let columnsToRemoveTaskFrom = columnSetterFunctions.filter(
-      (columnSetterFunction) => columnSetterFunction !== setterFunction
+      (columnSetterFunction) => columnSetterFunction !== tasksSetterFunction
     );
 
     columnsToRemoveTaskFrom.forEach((columnSetterFn) =>
@@ -47,21 +47,25 @@ export default function App() {
           header="To Do"
           tasks={tasksToDo}
           onDropFunction={(e) => handleDropTaskIntoColumn(e, setTasksToDo)}
+          tasksSetterFunction={setTasksToDo}
         />
         <TasksColumn
           header="In Progress"
           tasks={tasksInProgress}
           onDropFunction={(e) => handleDropTaskIntoColumn(e, setTasksInProgress)}
+          tasksSetterFunction={setTasksInProgress}
         />
         <TasksColumn
           header="Review"
           tasks={tasksReview}
           onDropFunction={(e) => handleDropTaskIntoColumn(e, setTasksReview)}
+          tasksSetterFunction={setTasksReview}
         />
         <TasksColumn
           header="Done"
           tasks={tasksDone}
           onDropFunction={(e) => handleDropTaskIntoColumn(e, setTasksDone)}
+          tasksSetterFunction={setTasksDone}
         />
       </div>
     </main>

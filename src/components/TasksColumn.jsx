@@ -1,6 +1,7 @@
 import classes from "./TasksColumn.module.css";
+import AddTaskButton from "./AddTaskButton";
 
-export default function TasksColumn({ header, tasks, onDropFunction }) {
+export default function TasksColumn({ header, tasks, onDropFunction, tasksSetterFunction }) {
   function handleDragStart(e, taskData) {
     e.dataTransfer.setData("taskData", JSON.stringify(taskData));
   }
@@ -26,6 +27,7 @@ export default function TasksColumn({ header, tasks, onDropFunction }) {
           );
         })}
       </ul>
+      <AddTaskButton tasksSetterFunction={tasksSetterFunction} />
     </div>
   );
 }
