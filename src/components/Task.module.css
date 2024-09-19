@@ -1,0 +1,17 @@
+.task {
+  padding: 10px;
+  background-color: cadetblue;
+  text-align: center;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+}
+
+.taskIcons {
+  display: none;
+}
+
+.task:hover .taskIcons {
+  display: flex;
+  gap: 10px;
+}

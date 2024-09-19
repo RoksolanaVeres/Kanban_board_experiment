@@ -1,5 +1,6 @@
 import classes from "./TasksColumn.module.css";
 import AddTaskButton from "./AddTaskButton";
+import Task from "./Task";
 
 export default function TasksColumn({ header, tasks, onDropFunction, tasksSetterFunction }) {
   function handleDragStart(e, taskData) {
@@ -16,14 +17,12 @@ export default function TasksColumn({ header, tasks, onDropFunction, tasksSetter
       <ul className={classes.tasksList}>
         {tasks.map((task) => {
           return (
-            <li
-              className={classes.task}
+            <Task
               key={task.taskId}
-              draggable
-              onDragStart={(e) => handleDragStart(e, task)}
-            >
-              {task.taskText}
-            </li>
+              task={task}
+              handleDragStart={handleDragStart}
+              tasksSetterFunction={tasksSetterFunction}
+            />
           );
         })}
       </ul>

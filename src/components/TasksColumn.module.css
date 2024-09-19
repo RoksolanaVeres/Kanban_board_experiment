@@ -20,9 +20,3 @@
   flex-direction: column;
   gap: 10px;
 }
-
-.task {
-  padding: 10px;
-  background-color: cadetblue;
-  text-align: center;
-}
